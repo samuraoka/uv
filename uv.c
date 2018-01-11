@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define MAX_USER 1024
 #define MAX_PASS MAX_USER
@@ -24,8 +26,8 @@ int do_auth()
 	fgets(password, MAX_PASS, stdin);
 
 #ifdef DEBUG
-	fprintf(stderr, "Username is at: 0x%8x (%d)\n", &username, strlen(username));
-	fprintf(stderr, "Password is at: 0x%8x (%d)\n", &password, strlen(password));
+	fprintf(stderr, "Username is at: 0x%08x (%d)\n", &username, strlen(username));
+	fprintf(stderr, "Password is at: 0x%08x (%d)\n", &password, strlen(password));
 #endif
 	
 	if (!strcmp(username, "user\n") && !strcmp(password, "washere\n"))
@@ -38,11 +40,11 @@ int do_auth()
 
 int log_error(int farray, char *msg)
 {
-	char *mesg;
+	char *err, *mesg;
 	char buffer[24];
 
 #ifdef DEBUG
-	fprintf(stderr, "Mesg is at: 0x%8x\n", &mesg);
+	fprintf(stderr, "Mesg is at: 0x%08x\n", &mesg);
 	fprintf(stderr, "Mesg is pointing at: 0x%08x\n", mesg);
 #endif
 	memset(buffer, 0x00, sizeof(buffer));
